@@ -21,6 +21,9 @@ import static org.mockito.Mockito.verify;
 public class HomeActivityTest {
     private HomeActivity activity;
     private Button startButton;
+    private Button pauseButton;
+    private Button resetButton;
+
     @Mock
     private IGameTimer gameTimer;
 
@@ -32,6 +35,8 @@ public class HomeActivityTest {
         TestGuiceModule.setUp(this, module);
         activity = Robolectric.buildActivity(HomeActivity.class).create().get();
         startButton = (Button) activity.findViewById(R.id.start_button);
+        pauseButton = (Button) activity.findViewById(R.id.pause_button);
+        resetButton = (Button) activity.findViewById(R.id.reset_button);
     }
 
     @After
@@ -53,6 +58,18 @@ public class HomeActivityTest {
     public void startButtonConnectedToGameTimer() throws Exception {
         startButton.performClick();
         verify(gameTimer).startTimer();
+    }
+
+    @Test
+    public void pauseButtonConnectedToGameTimer() throws Exception {
+        pauseButton.performClick();
+        verify(gameTimer).pauseTimer();
+    }
+
+    @Test
+    public void resetButtonConnectedToGameTimer() throws Exception {
+        resetButton.performClick();
+        verify(gameTimer).resetTimer();
     }
 
     @Test

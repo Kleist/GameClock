@@ -23,5 +23,21 @@ public class HomeActivity extends RoboActivity {
                 gameTimer.startTimer();
             }
         });
+
+        Button pauseButton = (Button) findViewById(R.id.pause_button);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameTimer.pauseTimer();
+            }
+        });
+
+        Button resetButton = (Button) findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameTimer.resetTimer();
+            }
+        });
     }
 }
