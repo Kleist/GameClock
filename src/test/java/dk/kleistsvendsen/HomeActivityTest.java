@@ -1,4 +1,4 @@
-package com.pivotallabs;
+package dk.kleistsvendsen;
 
 import android.widget.Button;
 import org.junit.Before;

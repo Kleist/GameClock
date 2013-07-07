@@ -109,45 +109,21 @@
     </build>
 
     <scm>
-        <url>git@github.com:pivotal/RobolectricSample.git</url>
-        <connection>scm:git:git://github.com/pivotal/RobolectricSample.git</connection>
-        <developerConnection>scm:git:git@github.com:pivotal/RobolectricSample.git</developerConnection>
+        <url>git@github.com:Kleist/GameClock.git</url>
+        <connection>scm:git:git://github.com/Kleist/GameClock.git</connection>
+        <developerConnection>scm:git:git@github.com:Kleist/GameClock.git</developerConnection>
     </scm>
 
     <developers>
         <developer>
-            <id>tyler</id>
-            <name>Tyler Schultz</name>
-            <email>tyler@pivotallabs.com</email>
-            <organization>Pivotal Labs</organization>
-            <organizationUrl>http://pivotallabs.com/</organizationUrl>
+            <id>Kleist</id>
+            <name>Andreas Kleist Svendsen</name>
+            <email>andreaskleist@gmail.com</email>
             <roles>
                 <role>Project Owner</role>
                 <role>Developer</role>
             </roles>
-            <timezone>PST/PDT</timezone>
-        </developer>
-        <developer>
-            <id>phil</id>
-            <name>Phil Goodwin</name>
-            <email>phil@pivotallabs.com</email>
-            <organization>Pivotal Labs</organization>
-            <organizationUrl>http://pivotallabs.com/</organizationUrl>
-            <roles>
-                <role>Developer</role>
-            </roles>
-            <timezone>PST/PDT</timezone>
-        </developer>
-        <developer>
-            <id>joemoore</id>
-            <name>Joe Moore</name>
-            <email>joe@pivotallabs.com</email>
-            <organization>Pivotal Labs</organization>
-            <organizationUrl>http://pivotallabs.com/</organizationUrl>
-            <roles>
-                <role>Developer</role>
-            </roles>
-            <timezone>EST/EDT</timezone>
+            <timezone>CET</timezone>
         </developer>
     </developers>
     <licenses>
@@ -157,6 +133,7 @@
                 The MIT License
 
                 Copyright (c) 2011 Pivotal Labs
+                Copyright (c) 2013 Andreas Kleist Svendsen
 
                 Permission is hereby granted, free of charge, to any person obtaining a copy
                 of this software and associated documentation files (the "Software"), to deal

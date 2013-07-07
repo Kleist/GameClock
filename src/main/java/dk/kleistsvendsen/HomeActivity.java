@@ -1,4 +1,4 @@
-package com.pivotallabs;
+package dk.kleistsvendsen;
 
 import android.app.Activity;
 import android.os.Bundle;
