@@ -1,5 +1,7 @@
 Work in progress...
 
+[![Build Status](https://travis-ci.org/Kleist/GameClock.png?branch=master)](https://travis-ci.org/Kleist/GameClock)
+
 # Roadmap (no promises, subject to big changes)
 
 ## 1.0
