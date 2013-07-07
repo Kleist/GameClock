@@ -2,4 +2,6 @@
 <resources>
     <string name="app_name">Template Android App</string>
     <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="reset">Reset</string>
 </resources>

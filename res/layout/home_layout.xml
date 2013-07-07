@@ -16,4 +16,20 @@
             android:layout_marginBottom="10dip"
             />
 
+    <Button
+            android:id="@+id/pause_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pause"
+            android:layout_marginBottom="10dip"
+            />
+
+    <Button
+            android:id="@+id/reset_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            android:layout_marginBottom="10dip"
+            />
+
 </LinearLayout>
