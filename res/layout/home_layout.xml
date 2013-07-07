@@ -9,12 +9,57 @@
         >
 
     <Button
+            android:id="@+id/reset_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            android:layout_marginBottom="10dip"
+            android:layout_gravity="center"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Time left"
+            android:id="@+id/timeLeftLabel"
+            android:layout_gravity="center"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/timeLeftText"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:clickable="false"
+            android:autoText="false"
+            android:text="20:00"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Time played"
+            android:id="@+id/timePlayedLabel"
+            android:layout_gravity="center"/>
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0:00"
+            android:id="@+id/timePlayedText"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:singleLine="false"/>
+
+    <Button
             android:id="@+id/start_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/start"
             android:layout_marginBottom="10dip"
-            />
+            android:layout_weight="2"/>
 
     <Button
             android:id="@+id/pause_button"
@@ -22,14 +67,6 @@
             android:layout_height="wrap_content"
             android:text="@string/pause"
             android:layout_marginBottom="10dip"
-            />
-
-    <Button
-            android:id="@+id/reset_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/reset"
-            android:layout_marginBottom="10dip"
-            />
+            android:layout_weight="2"/>
 
 </LinearLayout>

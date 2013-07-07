@@ -1,6 +1,8 @@
 package dk.kleistsvendsen;
 
 import android.widget.Button;
+import android.widget.TextView;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +18,8 @@ public class HomeActivityTest {
     private Button startButton;
     private Button pauseButton;
     private Button resetButton;
+    private TextView timeLeftText;
+    private TextView timePlayedText;
 
     @Before
     public void setUp() throws Exception {
@@ -23,6 +27,8 @@ public class HomeActivityTest {
         startButton = (Button) activity.findViewById(R.id.start_button);
         pauseButton = (Button) activity.findViewById(R.id.pause_button);
         resetButton = (Button) activity.findViewById(R.id.reset_button);
+        timeLeftText = (TextView) activity.findViewById(R.id.timeLeftText);
+        timePlayedText = (TextView) activity.findViewById(R.id.timePlayedText);
     }
 
     @Test
@@ -38,5 +44,15 @@ public class HomeActivityTest {
     @Test
     public void shouldHaveResetButton() throws Exception {
         assertThat((String) resetButton.getText(), equalTo("Reset"));
+    }
+
+    @Test
+    public void shouldHaveDefaultTimeLeftText() throws Exception {
+        assertThat((String) timeLeftText.getText(), equalTo("20:00"));
+    }
+
+    @Test
+    public void shouldHaveDefaultTimePlayedText() throws Exception {
+        assertThat((String) timePlayedText.getText(), equalTo("0:00"));
     }
 }
