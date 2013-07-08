@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.stubbing.OngoingStubbing;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
@@ -36,26 +37,21 @@ public class GameTimerTest {
 
     @Test
     public void testCallsTickOnStartTimer() {
-        mockQueueTic(0);
+        mockQueueTics(1);
         gameTimer.startTimer();
     }
 
     @Test
     public void timeLeftReturnsTimeSinceStart() {
-        mockQueueTic(100);
+        when(ticSource.tic()).thenReturn((long) 100);
         gameTimer.startTimer();
-        mockQueueTic(1000);
+        when(ticSource.tic()).thenReturn((long) 1000);
         assertEquals(900L, gameTimer.timePlayed());
-    }
-
-    private void mockQueueTic(int tic) {
-        when(ticSource.tic()).thenReturn((long) tic);
     }
 
     @Test
     public void timeLeftDoesntChangeAfterPause() {
-        mockQueueTic(0);
-        mockQueueTic(1);
+        mockQueueTics(2);
         gameTimer.startTimer();
         gameTimer.pauseTimer();
         long time = gameTimer.timePlayed();
@@ -64,12 +60,16 @@ public class GameTimerTest {
         verifyNoMoreInteractions(ticSource);
     }
 
+    private void mockQueueTics(int tics) {
+        OngoingStubbing<Long> stub = when(ticSource.tic());
+        for (int i=0; i<tics;++i) {
+            stub = stub.thenReturn((long) i);
+        }
+    }
+
     @Test
     public void pauseWhenPausedDoesNothing() {
-        mockQueueTic(0);
-        mockQueueTic(1);
-        mockQueueTic(2);
-        mockQueueTic(3);
+        mockQueueTics(4);
         gameTimer.startTimer();
         gameTimer.pauseTimer();
         long time = gameTimer.timePlayed();
@@ -79,13 +79,10 @@ public class GameTimerTest {
 
     @Test
     public void startButtonContinues() {
-        mockQueueTic(0);
+        mockQueueTics(4);
         gameTimer.startTimer();
-        mockQueueTic(1);
         gameTimer.pauseTimer();
-        mockQueueTic(2);
         gameTimer.startTimer();
-        mockQueueTic(3);
         assertEquals(2, gameTimer.timePlayed());
     }
 }
