@@ -37,7 +37,7 @@ public class HomeActivity extends RoboActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeLeftText.setText(Long.toString(gameTimer.timeLeft()));
+                timeLeftText.setText(Long.toString(gameTimer.timePlayed()));
                 gameTimer.pauseTimer();
             }
         });

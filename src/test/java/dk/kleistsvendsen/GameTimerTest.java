@@ -45,7 +45,7 @@ public class GameTimerTest {
         when(ticSource.tic()).thenReturn(0L);
         gameTimer.startTimer();
         when(ticSource.tic()).thenReturn(1000L);
-        assertEquals(1000L, gameTimer.timeLeft());
+        assertEquals(1000L, gameTimer.timePlayed());
     }
 
     @Test
@@ -53,9 +53,21 @@ public class GameTimerTest {
         when(ticSource.tic()).thenReturn(0L).thenReturn(1L);
         gameTimer.startTimer();
         gameTimer.pauseTimer();
-        long time = gameTimer.timeLeft();
-        assertEquals(time, gameTimer.timeLeft());
+        long time = gameTimer.timePlayed();
+        assertEquals(time, gameTimer.timePlayed());
         verify(ticSource, times(2)).tic();
         verifyNoMoreInteractions(ticSource);
+    }
+
+    @Test
+    public void startButtonContinues() {
+        when(ticSource.tic()).thenReturn(0L);
+        gameTimer.startTimer();
+        when(ticSource.tic()).thenReturn(1L);
+        gameTimer.pauseTimer();
+        when(ticSource.tic()).thenReturn(2L);
+        gameTimer.startTimer();
+        when(ticSource.tic()).thenReturn(3L);
+        assertEquals(2, gameTimer.timePlayed());
     }
 }

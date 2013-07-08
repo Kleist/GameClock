@@ -17,7 +17,7 @@ public class GameTimer implements IGameTimer {
     }
 
     @Override
-    public long timeLeft() {
+    public long timePlayed() {
         if (running_) {
             return ticSource_.tic() -startTic_;
         }
