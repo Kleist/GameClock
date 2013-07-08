@@ -6,5 +6,6 @@ public class GameClockModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(IGameTimer.class).to(GameTimer.class);
+        bind(ITicSource.class).to(TicSource.class);
     }
 }

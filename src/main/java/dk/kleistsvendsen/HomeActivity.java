@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import javax.inject.Inject;
+import com.google.inject.Inject;
 
 import roboguice.activity.RoboActivity;
 
@@ -37,7 +37,7 @@ public class HomeActivity extends RoboActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeLeftText.setText(Integer.toString(gameTimer.timeLeft()));
+                timeLeftText.setText(Long.toString(gameTimer.timeLeft()));
                 gameTimer.pauseTimer();
             }
         });

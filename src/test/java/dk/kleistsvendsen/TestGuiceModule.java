@@ -1,5 +1,6 @@
 package dk.kleistsvendsen;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.google.inject.AbstractModule;
@@ -14,7 +15,7 @@ import java.util.Set;
 
 import roboguice.RoboGuice;
 import roboguice.config.DefaultRoboModule;
-import roboguice.inject.RoboInjector;
+import roboguice.inject.*;
 
 public class TestGuiceModule extends AbstractModule {
 
@@ -27,6 +28,7 @@ public class TestGuiceModule extends AbstractModule {
     @Override
     @SuppressWarnings("unchecked")
     protected void configure() {
+        bind(Activity.class).toProvider(ActivityProvider.class).in(ContextSingleton.class);
         Set<Map.Entry<Class<?>, Object>> entries = bindings.entrySet();
         for (Map.Entry<Class<?>, Object> entry : entries) {
             bind((Class<Object>) entry.getKey()).toInstance(entry.getValue());

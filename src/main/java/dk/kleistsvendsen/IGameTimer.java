@@ -1,7 +1,7 @@
 package dk.kleistsvendsen;
 
 public interface IGameTimer {
-    public int timeLeft();
+    public long timeLeft();
 
     public void pauseTimer();
 

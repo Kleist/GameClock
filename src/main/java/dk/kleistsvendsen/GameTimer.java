@@ -1,12 +1,19 @@
 package dk.kleistsvendsen;
 
-import android.os.SystemClock;
+import com.google.inject.Inject;
 
 public class GameTimer implements IGameTimer {
+    @Inject
+    private ITicSource ticSource_;
+    private long startTic_;
+
+    public GameTimer() {
+        startTic_ = ticSource_.tic();
+    }
 
     @Override
-    public int timeLeft() {
-        return (int)(SystemClock.elapsedRealtime()%1000);
+    public long timeLeft() {
+        return ticSource_.tic() -startTic_;
     }
 
     @Override
@@ -16,7 +23,7 @@ public class GameTimer implements IGameTimer {
 
     @Override
     public void startTimer() {
-
+        ticSource_.tic();
     }
 
     @Override
