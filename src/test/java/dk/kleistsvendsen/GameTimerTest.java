@@ -60,6 +60,16 @@ public class GameTimerTest {
     }
 
     @Test
+    public void pauseWhenPausedDoesNothing() {
+        when(ticSource.tic()).thenReturn(0L).thenReturn(1L).thenReturn(2L).thenReturn(3L);
+        gameTimer.startTimer();
+        gameTimer.pauseTimer();
+        long time = gameTimer.timePlayed();
+        gameTimer.pauseTimer();
+        assertEquals(time, gameTimer.timePlayed());
+    }
+
+    @Test
     public void startButtonContinues() {
         when(ticSource.tic()).thenReturn(0L);
         gameTimer.startTimer();

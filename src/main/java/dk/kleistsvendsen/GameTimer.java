@@ -34,8 +34,10 @@ public class GameTimer implements IGameTimer {
 
     @Override
     public void pauseTimer() {
-        pauseTic_ = ticSource_.tic();
-        running_ = State.PAUSED;
+        if (running_ == State.RUNNING) {
+            pauseTic_ = ticSource_.tic();
+            running_ = State.PAUSED;
+        }
     }
 
     @Override
