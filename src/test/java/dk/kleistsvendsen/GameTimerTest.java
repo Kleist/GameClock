@@ -8,6 +8,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
 @RunWith(RobolectricTestRunner.class)
 public class GameTimerTest {
     private GameTimer gameTimer;
@@ -40,6 +43,6 @@ public class GameTimerTest {
         when(ticSource.tic()).thenReturn(0L);
         gameTimer.startTimer();
         when(ticSource.tic()).thenReturn(1000L);
-        assertThat(gameTimer.timeLeft(), equalTo(1000L));
+        assertEquals(1000L, gameTimer.timeLeft());
     }
 }
