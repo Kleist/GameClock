@@ -8,7 +8,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
-@RunWith(RobolectricTestRunner)
+@RunWith(RobolectricTestRunner.class)
 public class GameTimerTest {
     private GameTimer gameTimer;
 
