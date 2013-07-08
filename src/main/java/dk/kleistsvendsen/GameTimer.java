@@ -6,6 +6,7 @@ public class GameTimer implements IGameTimer {
     private ITicSource ticSource_;
     private long startTic_;
     private long pauseTic_;
+
     private enum State {
         IDLE,
         PAUSED,
@@ -25,9 +26,8 @@ public class GameTimer implements IGameTimer {
     @Override
     public long timePlayed() {
         if (running_ == State.RUNNING) {
-            return ticSource_.tic() -startTic_;
-        }
-        else {
+            return ticSource_.tic() - startTic_;
+        } else {
             return pauseTic_ - startTic_;
         }
     }
@@ -40,8 +40,18 @@ public class GameTimer implements IGameTimer {
 
     @Override
     public void startTimer() {
+        switch (running_) {
+            case IDLE:
+                running_ = State.RUNNING;
+                startTic_ = ticSource_.tic();
+                break;
+            case PAUSED:
+                startTic_ = ticSource_.tic() - timePlayed();
+                break;
+            case RUNNING:
+                break;
+        }
         running_ = State.RUNNING;
-        ticSource_.tic();
     }
 
     @Override
