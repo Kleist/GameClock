@@ -30,7 +30,7 @@ public class GameTimerTest {
     }
 
     @After
-    public void teardown() {
+    public void tearDown() {
         TestGuiceModule.tearDown();
     }
 
