@@ -36,21 +36,26 @@ public class GameTimerTest {
 
     @Test
     public void testCallsTickOnStartTimer() {
-        when(ticSource.tic()).thenReturn(0L);
+        mockQueueTic(0);
         gameTimer.startTimer();
     }
 
     @Test
     public void timeLeftReturnsTimeSinceStart() {
-        when(ticSource.tic()).thenReturn(100L);
+        mockQueueTic(100);
         gameTimer.startTimer();
-        when(ticSource.tic()).thenReturn(1000L);
+        mockQueueTic(1000);
         assertEquals(900L, gameTimer.timePlayed());
+    }
+
+    private void mockQueueTic(int tic) {
+        when(ticSource.tic()).thenReturn((long) tic);
     }
 
     @Test
     public void timeLeftDoesntChangeAfterPause() {
-        when(ticSource.tic()).thenReturn(0L).thenReturn(1L);
+        mockQueueTic(0);
+        mockQueueTic(1);
         gameTimer.startTimer();
         gameTimer.pauseTimer();
         long time = gameTimer.timePlayed();
@@ -61,7 +66,10 @@ public class GameTimerTest {
 
     @Test
     public void pauseWhenPausedDoesNothing() {
-        when(ticSource.tic()).thenReturn(0L).thenReturn(1L).thenReturn(2L).thenReturn(3L);
+        mockQueueTic(0);
+        mockQueueTic(1);
+        mockQueueTic(2);
+        mockQueueTic(3);
         gameTimer.startTimer();
         gameTimer.pauseTimer();
         long time = gameTimer.timePlayed();
@@ -71,13 +79,13 @@ public class GameTimerTest {
 
     @Test
     public void startButtonContinues() {
-        when(ticSource.tic()).thenReturn(0L);
+        mockQueueTic(0);
         gameTimer.startTimer();
-        when(ticSource.tic()).thenReturn(1L);
+        mockQueueTic(1);
         gameTimer.pauseTimer();
-        when(ticSource.tic()).thenReturn(2L);
+        mockQueueTic(2);
         gameTimer.startTimer();
-        when(ticSource.tic()).thenReturn(3L);
+        mockQueueTic(3);
         assertEquals(2, gameTimer.timePlayed());
     }
 }
