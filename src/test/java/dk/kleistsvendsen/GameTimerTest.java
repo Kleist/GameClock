@@ -3,13 +3,12 @@ package dk.kleistsvendsen;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.RobolectricTestRunner;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.when;
-
+@RunWith(RobolectricTestRunner)
 public class GameTimerTest {
     private GameTimer gameTimer;
 
