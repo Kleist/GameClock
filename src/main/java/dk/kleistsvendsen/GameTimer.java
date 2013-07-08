@@ -3,12 +3,12 @@ package dk.kleistsvendsen;
 import com.google.inject.Inject;
 
 public class GameTimer implements IGameTimer {
-    @Inject
     private ITicSource ticSource_;
     private long startTic_;
 
-    public GameTimer() {
-        startTic_ = ticSource_.tic();
+    @Inject
+    public GameTimer(ITicSource ticSource) {
+        ticSource_ = ticSource;
     }
 
     @Override
