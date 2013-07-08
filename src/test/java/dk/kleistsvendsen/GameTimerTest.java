@@ -6,10 +6,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import static roboguice.RoboGuice.getInjector;
 
 @RunWith(RobolectricTestRunner.class)
 public class GameTimerTest {
@@ -24,7 +26,7 @@ public class GameTimerTest {
         TestGuiceModule module = new TestGuiceModule();
         module.addBinding(ITicSource.class, ticSource);
         TestGuiceModule.setUp(this, module);
-        gameTimer = new GameTimer();
+        gameTimer = getInjector(Robolectric.application).getInstance(GameTimer.class);
     }
 
     @After
