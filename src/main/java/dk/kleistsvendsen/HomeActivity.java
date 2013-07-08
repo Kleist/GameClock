@@ -3,6 +3,7 @@ package dk.kleistsvendsen;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import javax.inject.Inject;
 
@@ -12,14 +13,22 @@ public class HomeActivity extends RoboActivity {
     private @Inject
     IGameTimer gameTimer;
 
+    TextView timeLeftText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
+        connectButtons_();
+    }
+
+    private void connectButtons_() {
         Button startButton = (Button) findViewById(R.id.start_button);
+        timeLeftText = (TextView) findViewById(R.id.timeLeftText);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                timeLeftText.setText("");
                 gameTimer.startTimer();
             }
         });
@@ -28,6 +37,7 @@ public class HomeActivity extends RoboActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                timeLeftText.setText(Integer.toString(gameTimer.timeLeft()));
                 gameTimer.pauseTimer();
             }
         });
@@ -36,6 +46,7 @@ public class HomeActivity extends RoboActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                timeLeftText.setText("Reset");
                 gameTimer.resetTimer();
             }
         });

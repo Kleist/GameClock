@@ -1,13 +1,12 @@
 package dk.kleistsvendsen;
 
-/**
- * Created by andreas on 07/07/13.
- */
+import android.os.SystemClock;
+
 public class GameTimer implements IGameTimer {
 
     @Override
     public int timeLeft() {
-        return 0;
+        return (int)(SystemClock.elapsedRealtime()%1000);
     }
 
     @Override
