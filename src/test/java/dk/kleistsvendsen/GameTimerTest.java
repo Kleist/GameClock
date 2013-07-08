@@ -41,10 +41,21 @@ public class GameTimerTest {
     }
 
     @Test
-    public void testStartThenTimeLeft() {
+    public void startThenTimeLeft() {
         when(ticSource.tic()).thenReturn(0L);
         gameTimer.startTimer();
         when(ticSource.tic()).thenReturn(1000L);
         assertEquals(1000L, gameTimer.timeLeft());
+    }
+
+    @Test
+    public void timeLeftDoesntChangeAfterPause() {
+        when(ticSource.tic()).thenReturn(0L).thenReturn(1L);
+        gameTimer.startTimer();
+        gameTimer.pauseTimer();
+        long time = gameTimer.timeLeft();
+        assertEquals(time, gameTimer.timeLeft());
+        verify(ticSource, times(2)).tic();
+        verifyNoMoreInteractions(ticSource);
     }
 }
