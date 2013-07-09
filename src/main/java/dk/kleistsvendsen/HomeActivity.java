@@ -1,6 +1,7 @@
 package dk.kleistsvendsen;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,28 +12,36 @@ import roboguice.activity.RoboActivity;
 
 public class HomeActivity extends RoboActivity {
     @Inject
-    private IGameTimer gameTimer;
+    private IGameTimer gameTimer_;
 
-    private TextView timeLeftText;
-    private TextView timePlayedText;
+    private TextView timeLeftText_;
+    private TextView timePlayedText_;
+
+    private final Handler updateHandler_ = new Handler();
+    private final Runnable updateViewRunner_ = new Runnable() {
+        @Override
+        public void run() {
+            updateView_();
+            updateHandler_.postDelayed(this, 50);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
         connectButtons_();
+        updateHandler_.post(updateViewRunner_);
     }
 
     private void connectButtons_() {
         Button startButton = (Button) findViewById(R.id.start_button);
-        timeLeftText = (TextView) findViewById(R.id.timeLeftText);
-        timePlayedText = (TextView) findViewById(R.id.timePlayedText);
+        timeLeftText_ = (TextView) findViewById(R.id.timeLeftText);
+        timePlayedText_ = (TextView) findViewById(R.id.timePlayedText);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameTimer.startTimer();
-                timeLeftText.setText(Long.toString(gameTimer.timePlayed()));
-                timePlayedText.setText(Long.toString(gameTimer.tic()));
+                gameTimer_.startTimer();
             }
         });
 
@@ -40,9 +49,7 @@ public class HomeActivity extends RoboActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameTimer.pauseTimer();
-                timeLeftText.setText(Long.toString(gameTimer.timePlayed()));
-                timePlayedText.setText(Long.toString(gameTimer.tic()));
+                gameTimer_.pauseTimer();
             }
         });
 
@@ -50,10 +57,12 @@ public class HomeActivity extends RoboActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameTimer.resetTimer();
-                timeLeftText.setText(Long.toString(gameTimer.timePlayed()));
-                timePlayedText.setText(Long.toString(gameTimer.tic()));
+                gameTimer_.resetTimer();
             }
         });
+    }
+    private void updateView_() {
+        timeLeftText_.setText(Long.toString(gameTimer_.tic()));
+        timePlayedText_.setText(Long.toString(gameTimer_.timePlayed()));
     }
 }

@@ -63,4 +63,9 @@ public class GameTimer implements IGameTimer {
         startTic_ = 0;
         pauseTic_ = 0;
     }
+
+    @Override
+    public boolean isRunning() {
+        return running_ == State.RUNNING;
+    }
 }

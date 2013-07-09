@@ -9,4 +9,6 @@ public interface IGameTimer {
     public void startTimer();
 
     public void resetTimer();
+
+    boolean isRunning();
 }
