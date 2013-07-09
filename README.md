@@ -6,9 +6,9 @@ Work in progress...
 
 ## 1.0
 * ~~Should show time left, and time played.~~
-* Start touch button
-* Pause touch button
-* Reset touch button with confirmation
+* ~~Start touch button~~
+* ~~Pause touch button~~
+* ~~Reset touch button~~ with confirmation
 * Volume button control for stop/pause
 * Tactile feedback
 
