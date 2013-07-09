@@ -11,6 +11,8 @@ import com.google.inject.Inject;
 import roboguice.activity.RoboActivity;
 
 public class HomeActivity extends RoboActivity {
+    public static final int MilliSecsPerMinute = 60 * 1000;
+    public static final int MilliSecsPerHalf = 20 * MilliSecsPerMinute;
     @Inject
     private IGameTimer gameTimer_;
 
@@ -63,7 +65,16 @@ public class HomeActivity extends RoboActivity {
     }
 
     public void updateView() {
-        timeLeftText_.setText(Long.toString(gameTimer_.tic()));
-        timePlayedText_.setText(Long.toString(gameTimer_.timePlayed()));
+        Long played = gameTimer_.timePlayed();
+        assert(played<= MilliSecsPerHalf);
+        Long left = MilliSecsPerHalf - played;
+        timeLeftText_.setText(formatTime_(played));
+        timePlayedText_.setText(formatTime_(left));
+    }
+
+    private String formatTime_(Long left) {
+        int minutes = (int)(left%MilliSecsPerMinute);
+        double seconds = (left-(MilliSecsPerMinute*minutes))/1000.0;
+        return String.format("%d:%.2f", minutes, seconds);
     }
 }

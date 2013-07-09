@@ -97,9 +97,30 @@ public class HomeActivityTest {
     @Test
     public void updateViewSetsTimePlayed() {
         CharSequence preText = timePlayedText.getText();
-        assertEquals(preText, timePlayedText.getText());
         when(gameTimer.timePlayed()).thenReturn(1000L);
         activity.updateView();
         assertTrue(preText != timePlayedText.getText());
+    }
+
+    @Test
+    public void updateViewSetsTimeLeft() {
+        CharSequence preText = timeLeftText.getText();
+        when(gameTimer.timePlayed()).thenReturn(1000L);
+        activity.updateView();
+        assertTrue(preText != timeLeftText.getText());
+    }
+
+    @Test
+    public void updateViewFormatsTimeLeft() {
+        when(gameTimer.timePlayed()).thenReturn(1000L);
+        activity.updateView();
+        assertEquals("19:00.00",timeLeftText.getText());
+    }
+
+    @Test
+    public void updateViewFormatsTimePlayed() {
+        when(gameTimer.timePlayed()).thenReturn(1000L);
+        activity.updateView();
+        assertEquals("1:00.00",timePlayedText.getText());
     }
 }
