@@ -10,7 +10,7 @@ import com.google.inject.Inject;
 import roboguice.activity.RoboActivity;
 
 public class HomeActivity extends RoboActivity {
-    private @Inject
+    @Inject
     private IGameTimer gameTimer;
 
     private TextView timeLeftText;
