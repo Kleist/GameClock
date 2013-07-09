@@ -60,13 +60,6 @@ public class GameTimerTest {
         verifyNoMoreInteractions(ticSource);
     }
 
-    private void mockQueueTics(int tics) {
-        OngoingStubbing<Long> stub = when(ticSource.tic());
-        for (int i=0; i<tics;++i) {
-            stub = stub.thenReturn((long) i);
-        }
-    }
-
     @Test
     public void pauseWhenPausedDoesNothing() {
         mockQueueTics(4);
@@ -84,5 +77,12 @@ public class GameTimerTest {
         gameTimer.pauseTimer();
         gameTimer.startTimer();
         assertEquals(2, gameTimer.timePlayed());
+    }
+
+    private void mockQueueTics(int tics) {
+        OngoingStubbing<Long> stub = when(ticSource.tic());
+        for (int i=0; i<tics;++i) {
+            stub = stub.thenReturn((long) i);
+        }
     }
 }
