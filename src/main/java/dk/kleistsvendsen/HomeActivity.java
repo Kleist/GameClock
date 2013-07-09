@@ -14,6 +14,7 @@ public class HomeActivity extends RoboActivity {
     IGameTimer gameTimer;
 
     TextView timeLeftText;
+    TextView timePlayedText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,11 +26,13 @@ public class HomeActivity extends RoboActivity {
     private void connectButtons_() {
         Button startButton = (Button) findViewById(R.id.start_button);
         timeLeftText = (TextView) findViewById(R.id.timeLeftText);
+        timePlayedText = (TextView) findViewById(R.id.timePlayedText);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeLeftText.setText("");
                 gameTimer.startTimer();
+                timeLeftText.setText(Long.toString(gameTimer.timePlayed()));
+                timePlayedText.setText(Long.toString(gameTimer.tic()));
             }
         });
 
@@ -37,8 +40,9 @@ public class HomeActivity extends RoboActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeLeftText.setText(Long.toString(gameTimer.timePlayed()));
                 gameTimer.pauseTimer();
+                timeLeftText.setText(Long.toString(gameTimer.timePlayed()));
+                timePlayedText.setText(Long.toString(gameTimer.tic()));
             }
         });
 
@@ -46,8 +50,9 @@ public class HomeActivity extends RoboActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeLeftText.setText("Reset");
                 gameTimer.resetTimer();
+                timeLeftText.setText(Long.toString(gameTimer.timePlayed()));
+                timePlayedText.setText(Long.toString(gameTimer.tic()));
             }
         });
     }

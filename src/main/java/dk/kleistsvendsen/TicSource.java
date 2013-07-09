@@ -8,6 +8,6 @@ public class TicSource implements ITicSource {
 
     @Override
     public long tic() {
-        return SystemClock.elapsedRealtime() % 1000;
+        return SystemClock.elapsedRealtime();
     }
 }
