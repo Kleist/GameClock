@@ -5,7 +5,7 @@ Work in progress...
 # Roadmap (no promises, subject to big changes)
 
 ## 1.0
-Should show time left, and time played.
+~~Should show time left, and time played.~~
 Start touch button
 
 Pause touch button
