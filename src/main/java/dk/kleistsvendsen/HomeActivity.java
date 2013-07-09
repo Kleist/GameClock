@@ -31,7 +31,8 @@ public class HomeActivity extends RoboActivity {
             updateHandler_.postDelayed(this, 50);
         }
     };
-    private final SimpleDateFormat dateFormatter_ = new SimpleDateFormat("m:ss:SSS");
+    final Calendar calendar_ = Calendar.getInstance();
+    private final SimpleDateFormat dateFormatter_ = new SimpleDateFormat("m:ss.SSS");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +79,7 @@ public class HomeActivity extends RoboActivity {
     }
 
     private String formatTime_(Long left) {
-        final Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(left);
-        return dateFormatter_.format(cal.getTime());
+        calendar_.setTimeInMillis(left);
+        return dateFormatter_.format(calendar_.getTime());
     }
 }
