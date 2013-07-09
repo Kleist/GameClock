@@ -8,6 +8,10 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import roboguice.activity.RoboActivity;
 
 public class HomeActivity extends RoboActivity {
@@ -27,6 +31,7 @@ public class HomeActivity extends RoboActivity {
             updateHandler_.postDelayed(this, 50);
         }
     };
+    private final SimpleDateFormat dateFormatter_ = new SimpleDateFormat("m:ss:SSS");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,13 +73,13 @@ public class HomeActivity extends RoboActivity {
         Long played = gameTimer_.timePlayed();
         assert(played<= MilliSecsPerHalf);
         Long left = MilliSecsPerHalf - played;
-        timeLeftText_.setText(formatTime_(played));
-        timePlayedText_.setText(formatTime_(left));
+        timeLeftText_.setText(formatTime_(left));
+        timePlayedText_.setText(formatTime_(played));
     }
 
     private String formatTime_(Long left) {
-        int minutes = (int)(left%MilliSecsPerMinute);
-        double seconds = (left-(MilliSecsPerMinute*minutes))/1000.0;
-        return String.format("%d:%.2f", minutes, seconds);
+        final Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(left);
+        return dateFormatter_.format(cal.getTime());
     }
 }

@@ -112,15 +112,15 @@ public class HomeActivityTest {
 
     @Test
     public void updateViewFormatsTimeLeft() {
-        when(gameTimer.timePlayed()).thenReturn(1000L);
+        when(gameTimer.timePlayed()).thenReturn(70321L);
         activity.updateView();
-        assertEquals("19:00.00",timeLeftText.getText());
+        assertEquals("18:49.679",timeLeftText.getText());
     }
 
     @Test
     public void updateViewFormatsTimePlayed() {
-        when(gameTimer.timePlayed()).thenReturn(1000L);
+        when(gameTimer.timePlayed()).thenReturn(60123L);
         activity.updateView();
-        assertEquals("1:00.00",timePlayedText.getText());
+        assertEquals("1:00.123",timePlayedText.getText());
     }
 }
