@@ -79,6 +79,14 @@ public class GameTimerTest {
         assertEquals(2, gameTimer.timePlayed());
     }
 
+    @Test
+    public void resetSetsTimePlayedTo0WhenStarted() {
+        mockQueueTics(4);
+        gameTimer.startTimer();
+        gameTimer.resetTimer();
+        assertEquals(0, gameTimer.timePlayed());
+    }
+
     private void mockQueueTics(int tics) {
         OngoingStubbing<Long> stub = when(ticSource.tic());
         for (int i=0; i<tics;++i) {

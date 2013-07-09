@@ -17,10 +17,8 @@ public class GameTimer implements IGameTimer {
 
     @Inject
     public GameTimer(ITicSource ticSource) {
-        running_ = State.IDLE;
         ticSource_ = ticSource;
-        startTic_ = 0;
-        pauseTic_ = 0;
+        resetTimer();
     }
 
     public long tic() {
@@ -61,6 +59,8 @@ public class GameTimer implements IGameTimer {
 
     @Override
     public void resetTimer() {
-
+        running_ = State.IDLE;
+        startTic_ = 0;
+        pauseTic_ = 0;
     }
 }
