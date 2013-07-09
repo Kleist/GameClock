@@ -12,20 +12,20 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(RobolectricTestRunner.class)
 public class HomeActivityTest {
     private HomeActivity activity;
-    private Button startButton;
-    private Button pauseButton;
-    private Button resetButton;
 
     @Mock
     private IGameTimer gameTimer;
+    private TextView timePlayedText;
+    private TextView timeLeftText;
+    private Button resetButton;
+    private Button startButton;
+    private Button pauseButton;
 
     @Before
     public void setUp() throws Exception {
@@ -34,9 +34,11 @@ public class HomeActivityTest {
         module.addBinding(IGameTimer.class, gameTimer);
         TestGuiceModule.setUp(this, module);
         activity = Robolectric.buildActivity(HomeActivity.class).create().get();
+        timePlayedText = (TextView) activity.findViewById(R.id.timePlayedText);
+        resetButton = (Button) activity.findViewById(R.id.reset_button);
         startButton = (Button) activity.findViewById(R.id.start_button);
         pauseButton = (Button) activity.findViewById(R.id.pause_button);
-        resetButton = (Button) activity.findViewById(R.id.reset_button);
+        timeLeftText = (TextView) activity.findViewById(R.id.timeLeftText);
     }
 
     @After
@@ -51,7 +53,17 @@ public class HomeActivityTest {
 
     @Test
     public void shouldHaveStartButton() throws Exception {
-        assertThat((String) startButton.getText(), equalTo("Start"));
+        assertEquals("Start",  startButton.getText());
+    }
+
+    @Test
+    public void shouldHavePauseButton() throws Exception {
+        assertEquals("Pause", pauseButton.getText());
+    }
+
+    @Test
+    public void shouldHaveResetButton() throws Exception {
+        assertEquals("Reset", resetButton.getText());
     }
 
     @Test
@@ -73,26 +85,21 @@ public class HomeActivityTest {
     }
 
     @Test
-    public void shouldHavePauseButton() throws Exception {
-        Button pauseButton = (Button) activity.findViewById(R.id.pause_button);
-        assertThat((String) pauseButton.getText(), equalTo("Pause"));
-    }
-
-    @Test
-    public void shouldHaveResetButton() throws Exception {
-        Button resetButton = (Button) activity.findViewById(R.id.reset_button);
-        assertThat((String) resetButton.getText(), equalTo("Reset"));
-    }
-
-    @Test
     public void shouldHaveDefaultTimeLeftText() throws Exception {
-        TextView timeLeftText = (TextView) activity.findViewById(R.id.timeLeftText);
-        assertThat((String) timeLeftText.getText(), equalTo("20:00"));
+        assertEquals("20:00", timeLeftText.getText());
     }
 
     @Test
     public void shouldHaveDefaultTimePlayedText() throws Exception {
-        TextView timePlayedText = (TextView) activity.findViewById(R.id.timePlayedText);
-        assertThat((String) timePlayedText.getText(), equalTo("0:00"));
+        assertEquals("0:00", timePlayedText.getText());
+    }
+
+    @Test
+    public void updateViewSetsTimePlayed() {
+        CharSequence preText = timePlayedText.getText();
+        assertEquals(preText, timePlayedText.getText());
+        when(gameTimer.timePlayed()).thenReturn(1000L);
+        activity.updateView();
+        assertTrue(preText != timePlayedText.getText());
     }
 }

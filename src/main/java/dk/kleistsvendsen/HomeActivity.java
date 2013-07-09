@@ -21,7 +21,7 @@ public class HomeActivity extends RoboActivity {
     private final Runnable updateViewRunner_ = new Runnable() {
         @Override
         public void run() {
-            updateView_();
+            updateView();
             updateHandler_.postDelayed(this, 50);
         }
     };
@@ -61,7 +61,8 @@ public class HomeActivity extends RoboActivity {
             }
         });
     }
-    private void updateView_() {
+
+    public void updateView() {
         timeLeftText_.setText(Long.toString(gameTimer_.tic()));
         timePlayedText_.setText(Long.toString(gameTimer_.timePlayed()));
     }
