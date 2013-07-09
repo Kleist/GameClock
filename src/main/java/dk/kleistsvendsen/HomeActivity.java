@@ -11,10 +11,10 @@ import roboguice.activity.RoboActivity;
 
 public class HomeActivity extends RoboActivity {
     private @Inject
-    IGameTimer gameTimer;
+    private IGameTimer gameTimer;
 
-    TextView timeLeftText;
-    TextView timePlayedText;
+    private TextView timeLeftText;
+    private TextView timePlayedText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
