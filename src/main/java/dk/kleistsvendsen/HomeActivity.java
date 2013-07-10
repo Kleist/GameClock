@@ -33,7 +33,11 @@ public class HomeActivity extends RoboActivity {
         @Override
         public void run() {
             updateView();
-            updateHandler_.postDelayed(this, 50);
+            // Remove all to make sure we don't have two updateViews running.
+            updateHandler_.removeCallbacks(updateViewRunner_); 
+            if (gameTimer_.isRunning()) {
+                updateHandler_.postDelayed(this, 50);
+            }
         }
     };
     final Calendar calendar_ = Calendar.getInstance();
@@ -99,6 +103,7 @@ public class HomeActivity extends RoboActivity {
         gameTimer_.startTimer();
         long[] pattern = {0,50,50,50,50,50,50,50,50};
         vibrate_(pattern);
+        updateHandler_.post(updateViewRunner_); // Ok to call even if it was running already
     }
 
     private void onPauseClick_() {
