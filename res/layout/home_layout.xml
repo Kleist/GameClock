@@ -25,15 +25,17 @@
             android:layout_gravity="center"/>
 
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/timeLeftText"
             android:layout_gravity="center"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:clickable="false"
             android:autoText="false"
-            android:text="20:00"/>
+            android:text="20:00.00"
+            android:textSize="80sp"
+            android:textIsSelectable="false"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -44,10 +46,10 @@
             android:layout_gravity="center"/>
 
     <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="0:00"
+            android:text="0:00.00"
             android:id="@+id/timePlayedText"
             android:layout_gravity="center"
             android:layout_weight="1"
