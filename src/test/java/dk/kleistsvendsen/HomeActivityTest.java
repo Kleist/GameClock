@@ -1,5 +1,7 @@
 package dk.kleistsvendsen;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -11,9 +13,11 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowAlertDialog;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import static org.robolectric.Robolectric.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
 public class HomeActivityTest {
@@ -79,19 +83,45 @@ public class HomeActivityTest {
     }
 
     @Test
-    public void resetButtonConnectedToGameTimer() throws Exception {
+    public void resetButtonTriggersDialog() throws Exception {
         resetButton.performClick();
+        AlertDialog alert =
+                ShadowAlertDialog.getLatestAlertDialog();
+        assertNotNull(alert);
+        ShadowAlertDialog sAlert = shadowOf(alert);
+        assertEquals(
+                activity.getString(R.string.reset_timer_question_title),
+                sAlert.getTitle().toString());
+        alert.getButton(Dialog.BUTTON_POSITIVE).performClick();
         verify(gameTimer).resetTimer();
     }
 
     @Test
+    public void resetDialogTriggersResetOnOK() throws Exception {
+        resetButton.performClick();
+        AlertDialog alert =
+                ShadowAlertDialog.getLatestAlertDialog();
+        alert.getButton(Dialog.BUTTON_POSITIVE).performClick();
+        verify(gameTimer).resetTimer();
+    }
+
+    @Test
+    public void resetDialogTriggersNothingOnCancel() throws Exception {
+        resetButton.performClick();
+        AlertDialog alert =
+                ShadowAlertDialog.getLatestAlertDialog();
+        alert.getButton(Dialog.BUTTON_NEGATIVE).performClick();
+        verifyNoMoreInteractions(gameTimer);
+    }
+
+    @Test
     public void shouldHaveDefaultTimeLeftText() throws Exception {
-        assertEquals("20:00", timeLeftText.getText());
+        assertEquals("20:00.000", timeLeftText.getText());
     }
 
     @Test
     public void shouldHaveDefaultTimePlayedText() throws Exception {
-        assertEquals("0:00", timePlayedText.getText());
+        assertEquals("0:00.000", timePlayedText.getText());
     }
 
     @Test

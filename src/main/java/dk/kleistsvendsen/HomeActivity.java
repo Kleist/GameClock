@@ -1,5 +1,7 @@
 package dk.kleistsvendsen;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -65,9 +67,25 @@ public class HomeActivity extends RoboActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameTimer_.resetTimer();
+                showConfirmResetDialog_();
             }
         });
+    }
+
+    public void showConfirmResetDialog_() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.reset_timer_question_title)
+                .setMessage(R.string.reset_timer_question)
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        gameTimer_.resetTimer();
+                    }
+
+                })
+                .setNegativeButton(R.string.cancel, null)
+                .show();
     }
 
     public void updateView() {
