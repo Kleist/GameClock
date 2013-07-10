@@ -34,7 +34,7 @@
             android:clickable="false"
             android:autoText="false"
             android:text="20:00.000"
-            android:textSize="80sp"
+            android:textSize="60sp"
             android:textIsSelectable="false"/>
 
     <TextView
@@ -55,7 +55,10 @@
             android:layout_weight="1"
             android:singleLine="false"
             android:password="false"
-            android:phoneNumber="false"/>
+            android:phoneNumber="false"
+            android:longClickable="false"
+            android:linksClickable="false"
+            />
 
     <Button
             android:id="@+id/start_button"
