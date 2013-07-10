@@ -8,9 +8,9 @@ Work in progress...
 * ~~Should show time left, and time played.~~
 * ~~Start touch button~~
 * ~~Pause touch button~~
-* ~~Reset touch button~~ with confirmation
-* Volume button control for stop/pause
-* Tactile feedback
+* ~~Reset touch button with confirmation~~
+* ~~Volume button control for stop/pause~~
+* ~~Tactile feedback~~
 
 ## 1.1
 * Configurable gametime

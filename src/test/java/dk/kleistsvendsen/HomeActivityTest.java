@@ -2,6 +2,9 @@ package dk.kleistsvendsen;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.os.RoboVibrator;
+import android.os.Vibrator;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -57,7 +60,7 @@ public class HomeActivityTest {
 
     @Test
     public void shouldHaveStartButton() throws Exception {
-        assertEquals("Start",  startButton.getText());
+        assertEquals("Start", startButton.getText());
     }
 
     @Test
@@ -77,9 +80,23 @@ public class HomeActivityTest {
     }
 
     @Test
+    public void startButtonTriggersVibrate() throws Exception {
+        RoboVibrator vibrator = (RoboVibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+        startButton.performClick();
+        assertTrue(vibrator.isVibrating());
+    }
+
+    @Test
     public void pauseButtonConnectedToGameTimer() throws Exception {
         pauseButton.performClick();
         verify(gameTimer).pauseTimer();
+    }
+
+    @Test
+    public void pauseButtonTriggersVibrate() throws Exception {
+        RoboVibrator vibrator = (RoboVibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+        pauseButton.performClick();
+        assertTrue(vibrator.isVibrating());
     }
 
     @Test

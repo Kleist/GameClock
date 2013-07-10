@@ -1,9 +1,12 @@
 package dk.kleistsvendsen;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -51,7 +54,7 @@ public class HomeActivity extends RoboActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameTimer_.startTimer();
+                onStartClick_();
             }
         });
 
@@ -59,7 +62,7 @@ public class HomeActivity extends RoboActivity {
         pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gameTimer_.pauseTimer();
+                onPauseClick_();
             }
         });
 
@@ -70,6 +73,43 @@ public class HomeActivity extends RoboActivity {
                 showConfirmResetDialog_();
             }
         });
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        int action = event.getAction();
+        int keyCode = event.getKeyCode();
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                if (action == KeyEvent.ACTION_DOWN) {
+                    onStartClick_();
+                }
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                if (action == KeyEvent.ACTION_DOWN) {
+                    onPauseClick_();
+                }
+                return true;
+            default:
+                return super.dispatchKeyEvent(event);
+        }
+    }
+
+    private void onStartClick_() {
+        gameTimer_.startTimer();
+        long[] pattern = {20,10,20,10,20};
+        vibrate_(pattern);
+    }
+
+    private void onPauseClick_() {
+        gameTimer_.pauseTimer();
+        long[] pattern = {200,200,200,200,200};
+        vibrate_(pattern);
+    }
+
+    private void vibrate_(long[] pattern) {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        v.vibrate(pattern,1);
     }
 
     public void showConfirmResetDialog_() {
