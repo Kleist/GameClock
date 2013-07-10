@@ -128,7 +128,7 @@ public class HomeActivityTest {
         AlertDialog alert =
                 ShadowAlertDialog.getLatestAlertDialog();
         alert.getButton(Dialog.BUTTON_NEGATIVE).performClick();
-        verifyNoMoreInteractions(gameTimer);
+        verify(gameTimer, never()).resetTimer();
     }
 
     @Test
