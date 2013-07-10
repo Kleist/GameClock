@@ -97,13 +97,13 @@ public class HomeActivity extends RoboActivity {
 
     private void onStartClick_() {
         gameTimer_.startTimer();
-        long[] pattern = {20,10,20,10,20};
+        long[] pattern = {0,50,50,50,50,50,50,50,50};
         vibrate_(pattern);
     }
 
     private void onPauseClick_() {
         gameTimer_.pauseTimer();
-        long[] pattern = {200,200,200,200,200};
+        long[] pattern = {0,200,200,200,200,200};
         vibrate_(pattern);
     }
 
