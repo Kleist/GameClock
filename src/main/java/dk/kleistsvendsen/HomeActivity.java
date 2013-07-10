@@ -109,7 +109,7 @@ public class HomeActivity extends RoboActivity {
 
     private void vibrate_(long[] pattern) {
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(pattern,1);
+        v.vibrate(pattern, -1);
     }
 
     public void showConfirmResetDialog_() {
