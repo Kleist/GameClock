@@ -12,6 +12,7 @@ Work in progress...
 * ~~Volume button control for stop/pause~~
 * ~~Tactile feedback~~
 * Keep time when sleeping / changing orientation
+* Add settings for hiding touch buttons and showing large time
 
 ## 1.1
 * Configurable gametime
