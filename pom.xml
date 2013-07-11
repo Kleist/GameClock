@@ -100,10 +100,12 @@
                 <configuration>
                     <format>xml</format> 
                     <instrumentation>
-                    <excludes>
-                        <exclude>**/R.class</exclude>
-                        <exclude>**/ActivityProvider.class</exclude>
-                    </excludes>
+                        <excludes>
+                            <exclude>dk/kleistsvendsen/R.class</exclude>
+                            <exclude>dk/kleistsvendsen/R$*.class</exclude>
+                            <exclude>dk/kleistsvendsen/BuildConfig.class</exclude>
+                            <exclude>dk/kleistsvendsen/ActivityProvider.class</exclude>
+                        </excludes>
                     </instrumentation>
                 </configuration>
             </plugin>
