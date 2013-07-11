@@ -93,32 +93,28 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>${cobertura.version}</version>
+                <configuration>
+                    <format>xml</format> 
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-			<id>cobertura</id>
-			<properties>
-				<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-				<sonar.branch>robolectric</sonar.branch>
-				<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-				<sonar.core.codeCoveragePlugin>cobertura</sonar.core.codeCoveragePlugin>
-				<sonar.cobertura.reportPath>../target/site/cobertura/coverage.xml</sonar.cobertura.reportPath>
-			</properties>
-			<reporting>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>cobertura-maven-plugin</artifactId>
-						<version>${cobertura.version}</version>
-						<configuration>
-							<format>xml</format>
-						</configuration>
-					</plugin>
-				</plugins>
-			</reporting>
-		</profile>
-    </profiles>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>${cobertura.version}</version>
+				<configuration>
+					<format>xml</format>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
     <scm>
         <url>git@github.com:Kleist/GameClock.git</url>
