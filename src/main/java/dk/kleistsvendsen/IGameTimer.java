@@ -3,7 +3,6 @@ package dk.kleistsvendsen;
 import android.os.Bundle;
 
 public interface IGameTimer {
-    public long tic();
     public long timePlayed();
 
     public void pauseTimer();

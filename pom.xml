@@ -105,31 +105,15 @@
 				<sonar.core.codeCoveragePlugin>cobertura</sonar.core.codeCoveragePlugin>
 				<sonar.cobertura.reportPath>../target/site/cobertura/coverage.xml</sonar.cobertura.reportPath>
 			</properties>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>cobertura-maven-plugin</artifactId>
-						<configuration>
-							<format>xml</format>
-							<aggregate>true</aggregate>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>clean</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
 			<reporting>
 				<plugins>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>cobertura-maven-plugin</artifactId>
 						<version>${cobertura.version}</version>
+						<configuration>
+							<format>xml</format>
+						</configuration>
 					</plugin>
 				</plugins>
 			</reporting>

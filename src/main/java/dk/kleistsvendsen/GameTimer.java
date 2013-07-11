@@ -26,9 +26,6 @@ public class GameTimer implements IGameTimer {
         resetTimer();
     }
 
-    public long tic() {
-        return ticSource_.tic();
-    }
     @Override
     public long timePlayed() {
         if (running_ == State.RUNNING) {

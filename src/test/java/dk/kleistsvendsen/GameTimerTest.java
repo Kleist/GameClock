@@ -91,7 +91,7 @@ public class GameTimerTest {
 
     /// Needed for e.g. orientation changes
     @Test
-    public void keepsTimeWhenSavedAndRestored() {
+    public void keepsTimeRunningWhenSavedAndRestored() {
         mockQueueTics(4);
         gameTimer.startTimer();
         Bundle bundle = new Bundle();
@@ -102,6 +102,21 @@ public class GameTimerTest {
         gameTimer.restoreState(bundle);
         assertTrue(gameTimer.isRunning());
         assertEquals(2L, gameTimer.timePlayed());
+    }
+
+    @Test
+    public void keepsTimeWhenPausedSavedAndRestored() {
+        mockQueueTics(4);
+        gameTimer.startTimer();
+        gameTimer.pauseTimer();
+        Long time = gameTimer.timePlayed();
+        Bundle bundle = new Bundle();
+        gameTimer.saveState(bundle);
+        gameTimer = getInjector(Robolectric.application).getInstance(GameTimer.class);
+        assertFalse(gameTimer.isRunning());
+        gameTimer.restoreState(bundle);
+        assertFalse(gameTimer.isRunning());
+        assertEquals(1L, gameTimer.timePlayed());
     }
 
     private void mockQueueTics(int tics) {
