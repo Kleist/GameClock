@@ -101,8 +101,8 @@
                     <format>xml</format> 
                     <instrumentation>
                     <excludes>
-                        <exclude>dk/kleistsvendsen/R.class</exclude>
-                        <exclude>dk/kleistsvendsen/ActivityProvider.class</exclude>
+                        <exclude>**/R.class</exclude>
+                        <exclude>**/ActivityProvider.class</exclude>
                     </excludes>
                     </instrumentation>
                 </configuration>
