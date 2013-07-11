@@ -47,7 +47,6 @@ public class HomeActivity extends RoboActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_layout);
         connectButtons_();
-        updateHandler_.post(updateViewRunner_);
     }
 
     @Override

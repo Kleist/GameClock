@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.RoboVibrator;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -74,15 +75,18 @@ public class HomeActivityTest {
     }
 
     @Test
-    public void startButtonConnectedToGameTimer() throws Exception {
+    public void startButtonConnectedToGameTimerAndVibrator() throws Exception {
+        RoboVibrator vibrator = (RoboVibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
         startButton.performClick();
         verify(gameTimer).startTimer();
+        assertTrue(vibrator.isVibrating());
     }
 
     @Test
-    public void startButtonTriggersVibrate() throws Exception {
+    public void volumeUpStartsTimerAndVibrator() throws Exception {
         RoboVibrator vibrator = (RoboVibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
-        startButton.performClick();
+        activity.dispatchKeyEvent(new KeyEvent(KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.ACTION_DOWN));
+        verify(gameTimer).startTimer();
         assertTrue(vibrator.isVibrating());
     }
 
@@ -90,6 +94,14 @@ public class HomeActivityTest {
     public void pauseButtonConnectedToGameTimer() throws Exception {
         pauseButton.performClick();
         verify(gameTimer).pauseTimer();
+    }
+
+    @Test
+    public void volumeDownPausesTimerAndStartsVibrator() throws Exception {
+        RoboVibrator vibrator = (RoboVibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+        activity.dispatchKeyEvent(new KeyEvent(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.ACTION_DOWN));
+        verify(gameTimer).pauseTimer();
+        assertTrue(vibrator.isVibrating());
     }
 
     @Test
