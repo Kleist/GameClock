@@ -99,6 +99,12 @@
                 <version>${cobertura.version}</version>
                 <configuration>
                     <format>xml</format> 
+                    <instrumentation>
+                    <excludes>
+                        <exclude>dk/kleistsvendsen/R.class</exclude>
+                        <exclude>dk/kleistsvendsen/ActivityProvider.class</exclude>
+                    </excludes>
+                    </instrumentation>
                 </configuration>
             </plugin>
         </plugins>
