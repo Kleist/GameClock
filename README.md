@@ -11,6 +11,7 @@ Work in progress...
 * ~~Reset touch button with confirmation~~
 * ~~Volume button control for stop/pause~~
 * ~~Tactile feedback~~
+* Keep time when sleeping / changing orientation
 
 ## 1.1
 * Configurable gametime
