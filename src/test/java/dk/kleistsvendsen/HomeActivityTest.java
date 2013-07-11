@@ -85,7 +85,7 @@ public class HomeActivityTest {
     @Test
     public void volumeUpStartsTimerAndVibrator() throws Exception {
         RoboVibrator vibrator = (RoboVibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
-        activity.dispatchKeyEvent(new KeyEvent(KeyEvent.KEYCODE_VOLUME_UP, KeyEvent.ACTION_DOWN));
+        activity.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_VOLUME_UP));
         verify(gameTimer).startTimer();
         assertTrue(vibrator.isVibrating());
     }
@@ -99,7 +99,7 @@ public class HomeActivityTest {
     @Test
     public void volumeDownPausesTimerAndStartsVibrator() throws Exception {
         RoboVibrator vibrator = (RoboVibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
-        activity.dispatchKeyEvent(new KeyEvent(KeyEvent.KEYCODE_VOLUME_DOWN, KeyEvent.ACTION_DOWN));
+        activity.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_VOLUME_DOWN));
         verify(gameTimer).pauseTimer();
         assertTrue(vibrator.isVibrating());
     }
