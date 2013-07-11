@@ -3,8 +3,8 @@ package dk.kleistsvendsen;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.RoboVibrator;
-import android.os.Vibrator;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,8 +18,13 @@ import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.shadows.ShadowAlertDialog;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.robolectric.Robolectric.shadowOf;
 
 @RunWith(RobolectricTestRunner.class)
@@ -51,11 +56,6 @@ public class HomeActivityTest {
     @After
     public void tearDown() {
         TestGuiceModule.tearDown();
-    }
-
-    @Test
-    public void mockShouldBeNotNull() throws Exception {
-        assertNotNull(gameTimer);
     }
 
     @Test
@@ -161,13 +161,20 @@ public class HomeActivityTest {
     public void updateViewFormatsTimeLeft() {
         when(gameTimer.timePlayed()).thenReturn(70321L);
         activity.updateView();
-        assertEquals("18:49.679",timeLeftText.getText());
+        assertEquals("18:49.679", timeLeftText.getText());
     }
 
     @Test
     public void updateViewFormatsTimePlayed() {
         when(gameTimer.timePlayed()).thenReturn(60123L);
         activity.updateView();
-        assertEquals("1:00.123",timePlayedText.getText());
+        assertEquals("1:00.123", timePlayedText.getText());
+    }
+
+    @Test
+    public void keepsStateOnOrientationChange() {
+        activity.recreate();
+        verify(gameTimer).saveState(any(Bundle.class));
+        verify(gameTimer).restoreState(any(Bundle.class));
     }
 }

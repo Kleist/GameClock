@@ -1,5 +1,7 @@
 package dk.kleistsvendsen;
 
+import android.os.Bundle;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -87,10 +89,26 @@ public class GameTimerTest {
         assertEquals(0, gameTimer.timePlayed());
     }
 
+    /// Needed for e.g. orientation changes
+    @Test
+    public void keepsTimeWhenSavedAndRestored() {
+        mockQueueTics(4);
+        gameTimer.startTimer();
+        Bundle bundle = new Bundle();
+        assertEquals(1L, gameTimer.timePlayed());
+        gameTimer.saveState(bundle);
+        gameTimer = getInjector(Robolectric.application).getInstance(GameTimer.class);
+        assertFalse(gameTimer.isRunning());
+        gameTimer.restoreState(bundle);
+        assertTrue(gameTimer.isRunning());
+        assertEquals(2L, gameTimer.timePlayed());
+    }
+
     private void mockQueueTics(int tics) {
         OngoingStubbing<Long> stub = when(ticSource.tic());
         for (int i=0; i<tics;++i) {
             stub = stub.thenReturn((long) i);
         }
     }
+
 }

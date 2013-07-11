@@ -15,7 +15,6 @@ import com.google.inject.Inject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 import roboguice.activity.RoboActivity;
 
@@ -49,6 +48,18 @@ public class HomeActivity extends RoboActivity {
         setContentView(R.layout.home_layout);
         connectButtons_();
         updateHandler_.post(updateViewRunner_);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        gameTimer_.saveState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle inState) {
+        super.onRestoreInstanceState(inState);
+        gameTimer_.restoreState(inState);
     }
 
     private void connectButtons_() {

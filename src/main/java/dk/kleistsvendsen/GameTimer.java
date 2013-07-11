@@ -1,12 +1,17 @@
 package dk.kleistsvendsen;
 
+import android.os.Bundle;
+
 import com.google.inject.Inject;
 
 public class GameTimer implements IGameTimer {
     private ITicSource ticSource_;
     private long startTic_;
     private long pauseTic_;
-
+    private static final String BUNDLE_IS_RUNNING = "gameTimer_isRunning";
+    private static final String BUNDLE_IS_PAUSED = "gameTimer_isPaused";
+    private static final String BUNDLE_PAUSE_TIC = "gameTimer_pauseTic";
+    private static final String BUNDLE_START_TIC = "gameTimer_startTic";
     private enum State {
         IDLE,
         PAUSED,
@@ -67,5 +72,30 @@ public class GameTimer implements IGameTimer {
     @Override
     public boolean isRunning() {
         return running_ == State.RUNNING;
+    }
+
+    @Override
+    public void saveState(Bundle outState) {
+        outState.putBoolean(BUNDLE_IS_RUNNING, running_ == State.RUNNING);
+        outState.putBoolean(BUNDLE_IS_PAUSED, running_ == State.PAUSED);
+        outState.putLong(BUNDLE_START_TIC, startTic_);
+        outState.putLong(BUNDLE_PAUSE_TIC, pauseTic_);
+    }
+
+    @Override
+    public void restoreState(Bundle inState) {
+        if (inState.containsKey(BUNDLE_IS_RUNNING)) {
+            if (inState.getBoolean(BUNDLE_IS_RUNNING)) {
+                running_ = State.RUNNING;
+            }
+            else if (inState.getBoolean(BUNDLE_IS_PAUSED)) {
+                running_ = State.PAUSED;
+            }
+            else {
+                running_ = State.IDLE;
+            }
+            startTic_ = inState.getLong(BUNDLE_START_TIC);
+            pauseTic_ = inState.getLong(BUNDLE_PAUSE_TIC);
+        }
     }
 }
