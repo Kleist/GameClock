@@ -11,7 +11,7 @@ Work in progress...
 * ~~Reset touch button with confirmation~~
 * ~~Volume button control for stop/pause~~
 * ~~Tactile feedback~~
-* Keep time when sleeping / changing orientation
+* ~~Keep time when sleeping / changing orientation~~
 * Add settings for hiding touch buttons and showing large time
 
 ## 1.1
