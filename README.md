@@ -16,8 +16,8 @@ Work in progress...
 ## 1.1
 * Configurable gametime
 * Configurable 2-min warning
-* Adjust time
-* Keep awake/wake up
+* Adjust time when paused
+* Keep awake
 * Keep track of score including when points were scored
 
 ## 1.2
