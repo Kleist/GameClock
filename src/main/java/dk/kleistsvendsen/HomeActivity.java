@@ -136,6 +136,7 @@ public class HomeActivity extends RoboActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         gameTimer_.resetTimer();
+                        updateHandler_.post(updateViewRunner_);
                     }
 
                 })
