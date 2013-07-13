@@ -144,6 +144,18 @@ public class HomeActivityTest {
     }
 
     @Test
+    public void resetUpdatesTimePlayed() throws Exception {
+        when(gameTimer.timePlayed()).thenReturn(10L);
+        startButton.performClick();
+        when(gameTimer.timePlayed()).thenReturn(0L);
+        resetButton.performClick();
+        AlertDialog alert =
+                ShadowAlertDialog.getLatestAlertDialog();
+        alert.getButton(Dialog.BUTTON_POSITIVE).performClick();
+        assertEquals("0:00.000", timePlayedText.getText());
+    }
+
+    @Test
     public void shouldHaveDefaultTimeLeftText() throws Exception {
         assertEquals("20:00.000", timeLeftText.getText());
     }
